@@ -1,0 +1,22 @@
+kind: pipeline
+name: default
+
+steps:
+- name: build test image
+  image: docker:latest
+  volumes:
+    - name: docker_sock
+      path: /var/run/docker.sock
+  commands:
+    - docker build -t laravel-app:latest .
+
+- name: Build Backend
+  image: composer:latest
+  commands:
+  - composer install --prefer-dist --no-interaction
+
+- name: Build Frontend
+  image: node:latest
+  commands:
+  - yarn install
+
