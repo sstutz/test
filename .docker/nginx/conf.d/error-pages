@@ -1,0 +1,17 @@
+# http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page
+
+# Not Found
+error_page 404 /404.html;
+location = /404.html {
+    root /var/www/errors;
+    internal;
+}
+
+# Bad gateway, service unavailable, gateway timeout
+error_page 500 502 503 504 /50x.html;
+location = /50x.html {
+    root /var/www/errors;
+   internal;
+}
+
+# vim: set ft=nginx:
